@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+
+  apache:
+    image: geekzonehostingllc/clipbucket-lamp-server
+    container_name: 'apache'
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - mysql
+    volumes:
+      - ./app/upload:/var/www/html/public
+      - ./docker/php/local.ini:/usr/local/etc/php/php.ini
+      - ./docker/vhosts:/etc/apache2/sites-enabled
+    networks:
+      - net 
+
+      
+  mysql:
+    container_name: "mysql"
+    restart: unless-stopped
+    image: mysql:5.7
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --sql_mode=''
+    environment:
+      - MYSQL_DATABASE
+      - MYSQL_PASSWORD
+      - MYSQL_ROOT_PASSWORD
+      - MYSQL_USER
+    volumes:
+      - data:/var/lib/mysql
+      - ./docker/mysql/dump/mysql.sql:/docker-entrypoint-initdb.d/mysql.sql
+    ports:
+      - "3306:3306"
+    networks:
+      - net
+
+volumes:
+  data:
+
+networks:
+  net:

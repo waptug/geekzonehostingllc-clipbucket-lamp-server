@@ -1,0 +1,165 @@
+FROM php:7.2-apache
+
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    default-mysql-client \
+    libpng-dev \
+    libxslt-dev libxml2-dev libpam-dev libedit-dev \
+    libjpeg62-turbo-dev \
+    locales \
+    jpegoptim optipng pngquant gifsicle \
+    software-properties-common \
+    imagemagick \
+    ruby \
+    lshw \
+    autoconf \
+    automake \
+    build-essential \
+    cmake \
+    git-core \
+    libass-dev \
+    libfreetype6-dev \
+    libgnutls28-dev \
+    libsdl2-dev \
+    libtool \
+    libva-dev \
+    libvdpau-dev \
+    libvorbis-dev \
+    libxcb1-dev \
+    libxcb-shm0-dev \
+    libxcb-xfixes0-dev \
+    meson \
+    ninja-build \
+    pkg-config \
+    texinfo \
+    wget \
+    yasm \
+    zlib1g-dev \
+    curl \
+    libcurl3-dev \
+    libxml2-dev \
+    libzip-dev \
+    libmcrypt-dev \
+    libicu-dev \
+    libonig-dev \
+    zip
+
+RUN apt-get update && apt-get install -y \
+    libmagickwand-dev --no-install-recommends \
+    && pecl install imagick \
+	&& docker-php-ext-enable imagick
+
+RUN apt-add-repository ppa:mc3man/trusty-media \
+    && apt-get install -y gpac mediainfo \
+    && gem install flvtool2
+
+RUN docker-php-ext-install -j$(nproc)  pdo \
+    pdo_mysql \
+    mysqli curl \
+    json \
+    zip \
+    mbstring \
+    intl \
+   && docker-php-source delete
+
+RUN docker-php-ext-install mysqli mbstring \
+    && docker-php-ext-enable mysqli
+
+RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install gd
+
+RUN ln -s /usr/bin/MP4Box /usr/local/bin/ \
+    && ln -s /usr/local/bin/php /usr/bin/
+
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir /opt/ffmpeg_sources && cd /opt/ffmpeg_sources && \
+    git -C fdk-aac pull 2> /dev/null || git clone --depth 1 https://github.com/mstorsjo/fdk-aac && \
+    cd fdk-aac && \
+    autoreconf -fiv && \
+    ./configure --prefix="/root/ffmpeg_build" --disable-shared && \
+    make && \
+    make install
+
+RUN cd /opt/ffmpeg_sources && \
+    wget https://www.nasm.us/pub/nasm/releasebuilds/2.15.05/nasm-2.15.05.tar.bz2 && \
+    tar xjvf nasm-2.15.05.tar.bz2 && \
+    cd nasm-2.15.05 && \
+    ./autogen.sh && \
+    PATH="/root/bin:$PATH" ./configure --prefix="/root/ffmpeg_build" --bindir="/root/bin" && \
+    make && \
+    make install
+
+RUN cd /opt/ffmpeg_sources && \
+    git -C x264 pull 2> /dev/null || git clone --depth 1 https://code.videolan.org/videolan/x264.git && \
+    cd x264 && \
+    PATH="/root/bin:$PATH" PKG_CONFIG_PATH="/root/ffmpeg_build/lib/pkgconfig" ./configure --prefix="/root/ffmpeg_build" --bindir="/root/bin" --enable-static --enable-pic && \
+    PATH="/root/bin:$PATH" make && \
+    make install
+
+RUN cd /opt/ffmpeg_sources && \
+    git -C x265_git pull 2> /dev/null || git clone https://bitbucket.org/multicoreware/x265_git && \
+    cd x265_git/build/linux && \
+    PATH="/root/bin:$PATH" cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX="/root/ffmpeg_build" -DENABLE_SHARED=off ../../source && \
+    PATH="/root/bin:$PATH" make && \
+    make install
+
+RUN cd /opt/ffmpeg_sources && \
+    wget -O lame-3.100.tar.gz https://downloads.sourceforge.net/project/lame/lame/3.100/lame-3.100.tar.gz && \
+    tar xzvf lame-3.100.tar.gz && \
+    cd lame-3.100 && \
+    PATH="/root/bin:$PATH" ./configure --prefix="/root/ffmpeg_build" --bindir="/root/bin" --disable-shared --enable-nasm && \
+    PATH="/root/bin:$PATH" make && \
+    make install
+
+
+RUN cd /opt/ffmpeg_sources && \
+    git -C opus pull 2> /dev/null || git clone --depth 1 https://github.com/xiph/opus.git  && \
+    cd opus && \
+    ./autogen.sh && \
+    ./configure --prefix="/root/ffmpeg_build" --disable-shared  && \
+    make && \
+    make install
+
+RUN cd /opt/ffmpeg_sources && \
+    git -C libvpx pull 2> /dev/null || git clone --depth 1 https://chromium.googlesource.com/webm/libvpx.git && \
+    cd libvpx && \
+    PATH="/root/bin:$PATH" ./configure --prefix="/root/ffmpeg_build" --disable-examples --disable-unit-tests --enable-vp9-highbitdepth --as=yasm && \
+    PATH="/root/bin:$PATH" make && \
+    make install
+
+ENV PATH="/root/bin:$PATH"
+ENV PKG_CONFIG_PATH="/root/ffmpeg_build/lib/pkgconfig"
+
+RUN cd /opt/ffmpeg_sources \ 
+    && wget http://ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2 \
+    && tar xjvf ffmpeg-snapshot.tar.bz2 \
+    && cd ffmpeg \
+    && ./configure \
+        --prefix="/root/ffmpeg_build" \
+        --pkg-config-flags="--static" \
+        --extra-cflags="-I/root/ffmpeg_build/include" \
+        --extra-ldflags="-L/root/ffmpeg_build/lib" \
+        --extra-libs="-lpthread -lm" \
+        --bindir="/usr/local/bin/" \
+        --enable-gpl \
+        --enable-libass \
+        --enable-libfdk-aac \
+        --enable-libfreetype \
+        --enable-libmp3lame \
+        --enable-libvpx \
+        --enable-libx264 \
+        --enable-libx265 \
+        --enable-nonfree && \
+    PATH="/root/bin:$PATH" make && make install
+
+
+RUN ln -s /usr/local/bin/ffmpeg /usr/bin
+
+RUN a2enmod rewrite headers ssl proxy proxy_http
+
+RUN service apache2 restart
+
+EXPOSE 80
+CMD ["apachectl", "-D", "FOREGROUND"]

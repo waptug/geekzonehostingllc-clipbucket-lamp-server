@@ -1,5 +1,6 @@
 # geekzonehostingllc-clipbucket-lamp-server
 geekzonehostingllc/clipbucket-lamp-server
+See docker hub repo at docker pull geekzonehostingllc/clipbucket-lamp-server: latest
 
 INSTRUCTIONS:
 

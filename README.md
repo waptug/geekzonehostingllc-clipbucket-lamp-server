@@ -82,6 +82,6 @@ GeekZoneHosting.Com appreciates your support of this project
 
 We can sell Virtual Private Server hosting and dedicated managed Linux servers to you if you do not have your own server solution.
 
-See the working install of this image at https://summerstreams.com for reference.
+See the working install of this image at http://summerstreams.com:8080 for reference.
 
 Community Support for using Clipbucket is available at Clipbucket.com

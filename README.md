@@ -6,6 +6,8 @@ Enjoy a self hosted Clipbucket.Com Video Streaming Server and photo gallery that
 
 This is a fully built out LAMP stack server running linux with all dependencies like ffmpeg and everything needed with a fully built and configured Default Clipbucket.Com Free Version install. It is ready for you to add content to and style the theme as you like.
 
+Included with the Enhanced Clipbucket image is the phpMyAdmin script for you to edit your database if needed. The system also has a automatic CertBot service running so you can register your SSL cert using Let's Encrypt and the CertBot will automaticly renew your cert for you.
+
 Building a working Clipbucket server from scratch is a very difficult process to install all of the server dependencies required. This image has done all the hard work for you. This image was produced by Michael Scott McGinn at GeekZoneHosting.Com and contributed to the Docker community.
 
 INSTRUCTIONS:

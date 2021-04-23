@@ -80,7 +80,7 @@ https://fvrr.co/3vE1B2F
 
 GeekZoneHosting.Com, LLC will receive a commission if you purchase any services from clicking the above link.
 
-GeekZoneHosting.Com appreciates your support of this project. If you appriciate this service and would like to directly support GeekZoneHosting.Com please consider purchasing a VPS server from us or a domain name for your site.  https://geekzonehosting.com 
+GeekZoneHosting.Com appreciates your support of this project. If you appreciate this service and would like to directly support GeekZoneHosting.Com please consider purchasing a VPS server from us or a domain name for your site. https://geekzonehosting.com
 
 We can sell Virtual Private Server hosting and dedicated managed Linux servers to you if you do not have your own server solution.
 

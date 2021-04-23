@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		{if in_dev()}
+			{$cache_buster=microtime(true)}
+		{else}
+			{$cache_buster=$Cbucket->version}
+		{/if}
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+		<!-- ClipBucket v{$Cbucket->version} -->
+		<meta name="copyright" content="ClipBucket - Integrated Units 2007 - {$smarty.now|date_format:"%Y"}">
+
+		<link rel="apple-touch-icon" sizes="57x57" href="{get_website_favicon_path()}">
+		<link rel="apple-touch-icon" sizes="60x60" href="{get_website_favicon_path()}">
+		<link rel="apple-touch-icon" sizes="72x72" href="{get_website_favicon_path()}">
+		<link rel="apple-touch-icon" sizes="76x76" href="{get_website_favicon_path()}">
+		<link rel="apple-touch-icon" sizes="114x114" href="{get_website_favicon_path()}">
+		<link rel="apple-touch-icon" sizes="120x120" href="{get_website_favicon_path()}">
+		<link rel="apple-touch-icon" sizes="144x144" href="{get_website_favicon_path()}">
+		<link rel="apple-touch-icon" sizes="152x152" href="{get_website_favicon_path()}">
+		<link rel="apple-touch-icon" sizes="180x180" href="{get_website_favicon_path()}">
+		<link rel="icon" type="image/png" sizes="192x192" href="{get_website_favicon_path()}">
+		<link rel="icon" type="image/png" sizes="32x32" href="{get_website_favicon_path()}">
+		<link rel="icon" type="image/png" sizes="96x96" href="{get_website_favicon_path()}">
+		<link rel="icon" type="image/png" sizes="16x16" href="{get_website_favicon_path()}">
+		<meta name="msapplication-TileImage" content="{get_website_favicon_path()}">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="theme-color" content="#ffffff">
+
+		<!-- RSS FEEDS -->
+		{rss_feeds link_tag=true}
+		{if isset($ninja_fighting)}
+            {ANCHOR place='seo_ninja'}
+        {else}
+        	<meta name="keywords" content="{$Cbucket->configs.keywords}">
+			<meta name="description" content="{$Cbucket->configs.description}">
+			<meta name="distribution" content="global">
+
+			<title>{cbtitle}</title>
+        {/if}
+
+		<link rel="stylesheet" href="{$theme}/css/bootstrap.min.css?cache={$cache_buster}">
+		<link rel="stylesheet" href="{$theme}/css/font-awesome.min.css?cache={$cache_buster}">
+		<link rel="stylesheet" href="{$theme}/css/icon-font.css?cache={$cache_buster}">
+		<link rel="stylesheet" href="{$theme}/css/custom-elements.css?cache={$cache_buster}">
+
+		{*if !in_dev()*}
+		<link rel="stylesheet" href="{$theme}/css/all.css?cache={$cache_buster}">
+		{*/if*}
+
+		<script src="{$theme}/js/jquery-1.11.3.min.js"></script>
+		<script src="/js/ui/jquery-ui-1.12.1.min.js"></script>
+		{if isset($__devmsgs)}
+			<link rel="stylesheet" href="/styles/global/jquery_ui.css">
+		{else}
+			<link rel="stylesheet" href="/styles/global/jquery_ui.min.css">
+		{/if}
+
+		<script>
+			var loadingImg = '<i class="glyphicon glyphicon-refresh animate-spin"></i>';
+			var loading = '<i class="glyphicon glyphicon-refresh animate-spin"></i> {lang code="loading"}...';
+			var baseurl = "/",
+				imageurl = "{$imageurl}",
+				userid = "{userid()}",
+				THIS_PAGE = "{$smarty.const.THIS_PAGE}";
+
+            var lang_subscribe = "{lang code='subscribe'}";
+            var lang_unsubscribe = "{lang code='unsubscribe'}";
+		</script>
+		{if isset($__devmsgs)}
+			<script src="{$theme}/js/custom.js"></script>
+		{else}
+			<script src="{$theme}/js/custom.min.js"></script>
+		{/if}
+
+		<script src="{$theme}/js/bootstrap.min.js"></script>
+		<script src="{$theme}/js/ui_plugins.js"></script>
+
+		{if isset($__devmsgs)}
+		<script src="/js/clipbucket.js"></script>
+		{else}
+		<script src="/js/clipbucket.min.js"></script>
+		{/if} 
+		<script src="{$theme}/js/uslider_js/jquery.mousewheel.js"></script>
+
+		<script async src='https://www.google.com/recaptcha/api.js'></script>
+
+		<!-- Script For Home Page Videos Slider //-->
+
+		<!-- Getting quicklist videos and assigning -->
+		{assign var=qlist_videos value=get_fast_qlist()}
+		{assign var=litems_count value=$qlist_videos|@count}
+		{if $litems_count >= 1} 
+			{assign var=got_qlitems value="yes"}	
+		{else}
+			{assign var=got_qlitems value="false"}	
+		{/if}
+
+		<script>
+			var fastQitems = "{$got_qlitems}";
+			$(document).ready(function(){
+				loading = '<i class="glyphicon glyphicon-refresh animate-spin"></i> {lang code="loading"}...';
+				$( 'ul#photos li:visible' ).each( function( i ){
+					$( this )[ (1&i) ? 'addClass' : 'removeClass' ]( 'photo-land-no' );
+				})
+			})
+			var pageNow = "{$smarty.const.THIS_PAGE}";
+		</script>
+		{include file="$style_dir/blocks/quicklist/qlist_main.html"}
+		{if isset($__devmsgs)}
+			<script type="text/javascript" src="{$theme}/js/fast_qlist.js"></script>
+		{else}
+			<script type="text/javascript" src="{$theme}/js/fast_qlist.min.js"></script>
+		{/if}
+		<script type="text/javascript" src="{$theme}/js/uslider_js/jquery.mousewheel.js"></script>
+		{include_header file='global_header'}
+		{if $Cbucket->header_files}
+		    <!-- Including Headers -->
+		    {foreach from=$Cbucket->header_files key=file item=type}
+		        {include_header type=$type file=$file}
+		    {/foreach}
+		    <!-- Ending Headers -->
+		{/if}
+	</head>

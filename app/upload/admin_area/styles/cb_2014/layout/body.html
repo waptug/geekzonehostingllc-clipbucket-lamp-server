@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		{include file="$layout_dir/global_header.html" }
+	</head>
+	<body>	
+		{include file="$layout_dir/header.html"}
+		<div class="main-container container" id="main-container">
+	        <div class="main-container-inner">
+				<div class="sidebar" id="sidebar">
+					{include file="$layout_dir/left_menu.html"}
+				</div>
+				<div class="main-content">
+					<div id="breadcrumbs" class="breadcrumbs">
+						<ul class="breadcrumb">
+							<li><a href="/admin_area/" class="icon-home home-icon"></a></li>
+							{foreach from=$breadcrumb item=page}
+								<li>{if !empty($page['url'])}<a href="{$page['url']}">{/if}{$page['title']}{if !empty($page['url'])}</a>{/if}</li>
+							{/foreach}
+							</li>
+						</ul><!-- .breadcrumb -->
+					</div>
+					<div class="page-content">
+	                    {include file="$style_dir/msg.html" }
+						<!-- Setting Body File -->
+						{if $Cbucket->show_page}
+	                        {foreach from=$template_files item=file}
+	                            {include_template_file file=$file}
+	                        {/foreach}
+						{/if}
+						<!-- Setting Body File -->
+					</div>
+				</div>
+			</div>
+			{include file="$layout_dir/footer.html" }
+		</div>
+	</body>
+</html>

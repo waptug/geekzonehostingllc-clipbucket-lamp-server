@@ -1,0 +1,420 @@
+<div class="heading">
+    <h2>ClipBucket V{$VERSION} {$STATE} Dashboard</h2>
+</div>
+<div class="row">
+	<div class="col-md-6">
+		<ul class="nav nav-tabs">
+			<li class="active">
+				<a data-toggle="tab" href="#rcomments">
+					<h5><i class="glyphicon glyphicon-comment"></i> Recent Comments</h5>
+				</a>
+			</li>
+			<li>
+				<a data-toggle="tab" href="#todolist">
+					<h5><i class="glyphicon glyphicon-list-alt"></i> ToDo List</h5>
+				</a>
+			</li>
+			<li>
+				<a data-toggle="tab" href="#pnotes">
+					<h5><i class="glyphicon glyphicon-pencil"></i> Personal Notes</h5>
+				</a>
+			</li>
+		</ul>
+		<div class="tab-content">
+			<div id="rcomments" class="tab-pane active">
+				<div class="widgetBox">
+					{if $comments}
+						{foreach from=$comments item=comment}
+							{$userdetails = $userquery->get_user_details($comment.userid)}
+							<div class="itemdiv dialogdiv">
+								<div class="user">
+									<img alt="{display_clean($userdetails.username)}" title="{display_clean($userdetails.username)}" src="{$userquery->getUserThumb($userdetails,'small')}">
+								</div>
+								<div class="body">
+									<div class="time">
+										<i class="icon-time"></i>
+										<span class="green">{$comment.date_added|date_format}</span>
+									</div>
+									<div class="name">
+										<a href="#">{display_clean($comment.anonym_name)}</a>
+									</div>
+									<div class="text">{display_clean($comment.comment|comment)}</div>
+									<div class="tools">
+										<a href="{getCommentAdminLink($comment.type, $comment.type_id)}" class="btn btn-minier btn-info">
+											<i class="icon-only icon-share-alt"></i>
+										</a>
+									</div>
+								</div>
+							</div>
+						{/foreach}
+					{/if}
+				</div>
+			</div>
+			<div id="todolist" class="tab-pane">
+				<div class="widgetBox">
+					<div class="addTodo paddingRightSmall paddingLeftLarge marginBottomLarge">
+						<div class="row">
+							<div class="from-group relative">
+								<div class="from-group">
+									<input type="text" name="addTodo" class="form-control addTodoText"/>
+									<button id="addTodo" class="btn btn-primary btn-sm">{lang code='add'}</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					{assign var=todos value=$myquery->get_todos()}
+					<ul class="row todosList" id="note-{$the_note.note_id}" >
+						{foreach from=$todos item=note}
+						<li class="col-md-12">
+							<div class="col-md-12">
+								<p class="oneTodo paddingLeftSmall col-md-10" id="{$note.todo_id}">
+									{display_clean($note.todo)}
+								</p>
+								<a href="#" class="btn btn-danger btn-xs delete col-md-2">{lang code='delete'}</a>
+							</div>
+						</li>
+						{/foreach}
+					</ul>
+				</div>
+			</div>
+			<div id="pnotes" class="tab-pane">
+				<div class="widgetBox">
+					<div class="addNote form-group paddingRightSmall">
+						<textarea class="form-control" name="note"></textarea>
+						<div class="alignRight marginTopSmall">
+							<a href="#" id="add_new_note" class="btn btn-primary btn-xs">Add a note</a>
+						</div>
+					</div>
+					{assign var=notes value=$myquery->get_notes()}
+					<ul class="notesList row paddingRightSmall" id="note-{$the_note.note_id}" >
+						{foreach from=$notes item=note}
+						<li class="col-md-4">
+							<div>
+								<p class="oneNote" id="{$note.note_id}">
+									{display_clean($note.note)}
+									<a href="#" class="delete">×</a>
+								</p>
+							</div>
+						</li>
+						{/foreach}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<ul class="nav nav-tabs">
+			<li class="title">
+				<h5><i class="glyphicon glyphicon-list-alt"></i> {lang code='dashboard_changelogs'}</h5>
+			</li>
+			<li class="active">
+				<a data-toggle="tab" href="#541">
+					<h5>5.4.1</h5>
+				</a>
+			</li>
+			<li>
+				<a data-toggle="tab" href="#540">
+					<h5>5.4.0</h5>
+				</a>
+			</li>
+			<li>
+				<a data-toggle="tab" href="#531">
+					<h5>5.3.1</h5>
+				</a>
+			</li>
+			<li>
+				<a data-toggle="tab" href="#530-500">
+					<h5>5.3.0 - 5.0.0</h5>
+				</a>
+			</li>
+			{if config('enable_update_checker')=='1'}
+			<li class="right">
+				<a data-toggle="tab" href="#update">
+					<h5>{lang code='dashboard_update_status'} <span class="status-{get_update_status(true)}"></span></h5>
+				</a>
+			</li>
+			{/if}
+		</ul>
+		<div class="tab-content nopadding">
+			<div id="541" class="tab-pane active">
+				<div class="widgetBox">
+					{display_changelog('541')}
+				</div>
+			</div>
+			<div id="540" class="tab-pane">
+				<div class="widgetBox">
+					{display_changelog('540')}
+				</div>
+			</div>
+			<div id="531" class="tab-pane">
+				<div class="widgetBox">
+					{display_changelog('531')}
+				</div>
+			</div>
+			<div id="530-500" class="tab-pane">
+				<div class="widgetBox">
+					{display_changelog('530')}
+				</div>
+			</div>
+			{if config('enable_update_checker')=='1'}
+			<div id="update" class="tab-pane">
+				<div class="widgetBox">
+					{get_update_status()}
+				</div>
+			</div>
+			{/if}
+		</div>
+	</div>
+</div>
+<br/>
+<div class="row">
+	<div class="col-md-6">
+		<ul class="nav nav-tabs">
+			<li class="active">
+				<a data-toggle="tab" href="#overall_statistics">
+					<h5>Overall Statistics</h5>
+				</a>
+			</li>
+			<li>
+				<a data-toggle="tab" href="#flagged_objects">
+					<h5>Flagged Objects</h5>
+				</a>
+			</li>
+			<li>
+				<a data-toggle="tab" href="#users_statistics">
+					<h5>Users Statistics</h5>
+				</a>
+			</li>
+			<li>
+				<a data-toggle="tab" href="#video_statistics">
+					<h5>Video Statistics</h5>
+				</a>
+			</li>
+		</ul>
+		<div class="tab-content">
+			<div id="overall_statistics" class="tab-pane active">
+				<div id="piechart" style="height:400px;"></div>
+			</div>
+			<div id="flagged_objects" class="tab-pane">
+				<div id="donutchart" style="height:400px;"></div>
+			</div>
+			<div id="users_statistics" class="tab-pane">
+				<div id="ubarchart" style="height:400px;"></div>
+			</div>
+			<div id="video_statistics" class="tab-pane">
+				<div id="vbarchart" style="height:400px;"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	AmCharts.makeChart("piechart", {
+		"type": "pie",
+		"adjustPrecision": true,
+		"angle": 12,
+		"balloonText": "[[title]]<br><span style='font-size:14px;'><b>[[value]]</b> ([[percents]]%)</span>",
+		"depth3D": 15,
+		"maxLabelWidth": 150,
+		"titleField": "category",
+		"valueField": "column-1",
+		"processTimeout": 5,
+		"theme": "light",
+		"allLabels": [],
+		"balloon": {},
+		"legend": {
+			"enabled": true,
+			"align": "left",
+			"markerType": "circle"
+		},
+		"titles": [
+			{
+				"bold": false,
+				"id": "Title-1",
+				"size": 15,
+				"text": "Overall Statistics"
+			}
+		],
+		"dataProvider": [
+			{
+				"category": "Users",
+				"column-1": '{get_users count_only=yes}'
+			},
+			{
+				"category": "Photos",
+				"column-1": '{get_photos count_only=yes}'
+			},
+			{
+				"category": "Videos",
+				"column-1": '{get_videos count_only=yes}'
+			},
+			{
+				"category": "Collections",
+				"column-1": '{get_collections count_only=yes}'
+			},
+
+		]
+	});
+
+	AmCharts.makeChart("donutchart", {
+		"type": "pie",
+		"angle": 12,
+		"balloonText": "[[title]]<br><span style='font-size:14px;'><b>[[value]]</b> ([[percents]]%)</span>",
+		"depth3D": 15,
+		"innerRadius": "30%",
+		"titleField": "category",
+		"valueField": "column-1",
+		"processTimeout": 5,
+		"theme": "light",
+		"allLabels": [],
+		"balloon": {},
+		"legend": {
+			"enabled": true,
+			"align": "center",
+			"markerType": "circle"
+		},
+		"titles": [
+			{
+				"bold": false,
+				"id": "Title-1",
+				"size": 15,
+				"text": "Flagged Objects"
+			}
+		],
+		"dataProvider": [
+
+			{
+				"category": "Photos",
+				"column-1": '{$cbphoto->action->count_flagged_objects()}'
+			},
+			{
+				"category": "Videos",
+				"column-1": '{$cbvid->action->count_flagged_objects()}'
+			}
+		]
+	});
+
+	AmCharts.makeChart("ubarchart", {
+		"type": "serial",
+		"pathToImages": "https://www.amcharts.com/lib/3/images/",
+		"categoryField": "category",
+		"startDuration": 1,
+		"mouseWheelZoomEnabled": true,
+		"startEffect": "easeOutSine",
+		"autoDisplay": true,
+		"theme": "light",
+		"categoryAxis": {
+			"gridPosition": "start"
+		},
+		"trendLines": [],
+		"graphs": [
+			{
+				"colorField": "color",
+				"fillAlphas": 1,
+				"id": "AmGraph-1",
+				"lineColorField": "color",
+				"title": "graph 1",
+				"type": "column",
+				"valueField": "column-1"
+			}
+		],
+		"guides": [],
+		"valueAxes": [
+			{
+				"id": "ValueAxis-1",
+				"title": "Users"
+			}
+		],
+		"allLabels": [],
+		"balloon": {},
+		"titles": [
+			{
+				"bold": false,
+				"id": "Title-1",
+				"size": 15,
+				"text": "Users Statistics"
+			}
+		],
+		"dataProvider": [
+			{
+				"category": "Total",
+				"column-1": '{get_users count_only=yes}'
+			},
+			{
+				"category": "Active",
+				"column-1": '{get_users count_only=yes status='Ok'}'
+			},
+			{
+				"category": "Inactive",
+				"column-1": '{get_users count_only=yes status='ToActivate'}'
+			}
+		]
+	});
+
+	AmCharts.makeChart("vbarchart", {
+		"type": "serial",
+		"pathToImages": "https://www.amcharts.com/lib/3/images/",
+		"categoryField": "category",
+		"startDuration": 1,
+		"mouseWheelZoomEnabled": true,
+		"startEffect": "easeOutSine",
+		"autoDisplay": true,
+		"theme": "light",
+		"categoryAxis": {
+			"gridPosition": "start"
+		},
+		"trendLines": [],
+		"graphs": [
+			{
+				"colorField": "color",
+				"fillAlphas": 1,
+				"id": "AmGraph-1",
+				"lineColorField": "color",
+				"title": "graph 1",
+				"type": "column",
+				"valueField": "column-1"
+			}
+		],
+		"guides": [],
+		"valueAxes": [
+			{
+				"id": "ValueAxis-1",
+				"title": "Videos"
+			}
+		],
+		"allLabels": [],
+		"balloon": {},
+		"titles": [
+			{
+				"bold": false,
+				"id": "Title-1",
+				"size": 15,
+				"text": "Video Statistics"
+			}
+		],
+		"dataProvider": [
+			{
+				"category": "Total",
+				"column-1": '{get_videos count_only=yes}'
+			},
+			{
+				"category": "Active",
+				"column-1": '{get_videos count_only=yes active="yes"}'
+			},
+			{
+				"category": "Deactive",
+				"column-1": '{get_videos count_only=yes active='no'}'
+			},
+			{
+				"category": "Reported",
+				"column-1": '{$cbvid->action->count_flagged_objects()}'
+			}
+		]
+	});
+</script>
+
+{if $development_mode}
+<script src="{$theme_url}/js/pages/dashboard/dashboard.js"></script>
+{else}
+<script src="{$theme_url}/js/pages/dashboard/dashboard.min.js"></script>
+{/if}

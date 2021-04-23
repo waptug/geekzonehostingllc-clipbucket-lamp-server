@@ -1,0 +1,117 @@
+<meta charset="UTF-8">
+<title>{cbtitle}</title>
+
+<link rel="apple-touch-icon" sizes="57x57" href="{get_website_favicon_path()}">
+<link rel="apple-touch-icon" sizes="60x60" href="{get_website_favicon_path()}">
+<link rel="apple-touch-icon" sizes="72x72" href="{get_website_favicon_path()}">
+<link rel="apple-touch-icon" sizes="76x76" href="{get_website_favicon_path()}">
+<link rel="apple-touch-icon" sizes="114x114" href="{get_website_favicon_path()}">
+<link rel="apple-touch-icon" sizes="120x120" href="{get_website_favicon_path()}">
+<link rel="apple-touch-icon" sizes="144x144" href="{get_website_favicon_path()}">
+<link rel="apple-touch-icon" sizes="152x152" href="{get_website_favicon_path()}">
+<link rel="apple-touch-icon" sizes="180x180" href="{get_website_favicon_path()}">
+<link rel="icon" type="image/png" sizes="192x192" href="{get_website_favicon_path()}">
+<link rel="icon" type="image/png" sizes="32x32" href="{get_website_favicon_path()}">
+<link rel="icon" type="image/png" sizes="96x96" href="{get_website_favicon_path()}">
+<link rel="icon" type="image/png" sizes="16x16" href="{get_website_favicon_path()}">
+<meta name="msapplication-TileImage" content="{get_website_favicon_path()}">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
+
+<link rel="stylesheet" href="{$theme_url}/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="{$theme_url}/assets/css/font-awesome.min.css" />
+<link rel="stylesheet" href="{$theme_url}/css/styles.css" />
+
+<!--[if IE 7]>
+  <link rel="stylesheet" href="{$theme_url}/assets/css/font-awesome-ie7.min.css" />
+<![endif]-->
+
+<!--[if lte IE 8]>
+<link rel="stylesheet" href="{$theme_url}/assets/css/ace-ie.min.css" />
+<![endif]-->
+
+<!--[if lt IE 9]>
+<script src="{$theme_url}/assets/js/html5shiv.js"></script>
+<script src="{$theme_url}/assets/js/respond.min.js"></script>
+<![endif]-->
+
+<!-- fonts -->
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300" />
+
+<!-- ace styles -->
+{if !this_page('admin_login')} <!-- these css file not includes in admin area login.html -->
+<link rel="stylesheet" href="{$theme_url}/assets/css/ace.min.css" />
+<link rel="stylesheet" href="{$theme_url}/assets/css/ace-rtl.min.css" />
+<link rel="stylesheet" href="{$theme_url}/assets/css/ace-skins.min.css" />
+{/if}
+
+<script type="text/javascript">
+    var baseurl = "/";
+    var imageurl = "{$imageurl}";
+
+    var lang_reply_to = "{lang code='reply_to'}";
+    var lang_reply = "{lang code='reply'}";
+</script>
+
+<script src="{$theme_url}/assets/js/ace-extra.min.js"></script>
+<script src="/js/clipbucket.js"></script>
+
+<script type="text/javascript" src="/js/functions.js"></script>
+<script type="text/javascript" src="/js/admin_functions.js"></script>
+<script type="text/javascript" src="/js/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="/js/jquery_plugs/jquery.cookie.js"></script>
+
+<link rel="stylesheet" href="{$theme_url}/css/summernote.css" />
+<script src="{$theme_url}/js/editor.js"></script>
+<script src="{$theme_url}/js/main.js"></script>
+<script src="{$theme_url}/js/jquery.amcharts.js" type="text/javascript"></script>
+<script src="{$theme_url}/js/jquery.pie.js" type="text/javascript"></script>
+<script src="{$theme_url}/js/jquery.light.js" type="text/javascript"></script>
+
+<script src="{$theme_url}/js/jquery.serial.js" type="text/javascript"></script>
+<script src="{$theme_url}/js/chart-1.0.2.min.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="{$theme_url}/bootstrap-editable/css/bootstrap-editable.css" />
+<script src="{$theme_url}/bootstrap-editable/js/bootstrap-editable.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        if( $(".popoverButton").length > 0 ){
+            $(".popoverButton").popover();
+        }
+
+        $(".drop").on({
+            click: function(e){
+                var ele = $(this).parent().nextAll("#content").get(0);
+                $(ele).toggle();
+            }
+        });
+    });
+
+    $(document).ready(function() {
+        $('#desc').summernote();
+        $('.desc').summernote();
+    });
+</script>
+
+<style type="text/css">
+	input[type=checkbox].ace.ace-switch.ace-switch-5+.lbl::before{
+		content:"{lang code='yes'}\a0\a0\a0\a0\a0\a0\a0\a0\a0{lang code='no'}" !important;
+	}
+</style>
+
+{if $Cbucket->AdminJSArray}
+<!-- Including JS Files-->
+{foreach from=$Cbucket->AdminJSArray key=file item=type}
+	{include_js type=$type file=$file}
+{/foreach}
+<!-- Including JS Files-->
+{/if}
+
+{if $Cbucket->admin_header_files}
+    <!-- Including Headers -->
+    {foreach from=$Cbucket->admin_header_files key=file item=type}
+        {include_header type=$type file=$file}
+    {/foreach}
+    <!-- Ending Headers -->
+{/if}

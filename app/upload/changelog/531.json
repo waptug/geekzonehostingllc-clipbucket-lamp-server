@@ -1,0 +1,49 @@
+{
+  "version":"5.3.1",
+  "revision": "10",
+  "status":"stable",
+  "detail":[
+    {
+      "title":"Admin area",
+      "description":[
+        "Update changelog display"
+        ,"Update lib amCharts to 3.21.15"
+        ,"Remove Clipbucket news"
+        ,"Add new update statut checker"
+        ,"Update video comment count when deleting comment"
+        ,"Replace outdated footer links"
+        ,"Fix possibles XSS injections"
+        ,"Update dashboard comments display"
+        ,"Fix video edit user's avatar display on comments"
+        ,"Update dashboard stats display"
+      ]
+    }
+    ,{
+      "title":"Front office",
+      "description":[
+        "Fix possibles XSS injections"
+        ,"Fix comment saving"
+      ]
+    }
+    ,{
+      "title":"Video conversion",
+      "description":[
+        "Fix rare conversion fail"
+      ]
+    }
+    ,{
+      "title": "Miscellaneous",
+      "description": [
+        "Remove unused or outdated files",
+        "Cleanup code",
+        "Fix installation <i>#120<\/i>",
+        "Make Clipbucket.php fully dynamic",
+        "Fix installation HTML",
+        "Fix user creation <i>#121<\/i>",
+        "Fix user delete",
+        "Fix installation SQL",
+        "Fix DB structure"
+      ]
+    }
+  ]
+}

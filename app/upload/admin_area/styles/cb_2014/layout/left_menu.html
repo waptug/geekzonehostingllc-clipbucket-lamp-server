@@ -1,0 +1,33 @@
+<ul class="nav nav-list" id="sidebar">
+	{foreach from=$Cbucket->AdminMenu item=menu}
+	<li {if $breadcrumb[0]['title'] == $menu['title']}class="active open"{/if}>
+		{if isset($menu['url'])}
+			<a href="{$menu['url']}">
+				<i class="{$menu['class']}"></i>
+				<span class="menu-text">{$menu['title']}</span>
+			</a>
+		{else}
+		<a href="#" class="dropdown-toggle">
+			<i class="{$menu['class']}"></i>
+			<span class="menu-text"> {$menu['title']} </span>
+			<b class="arrow icon-angle-down"></b>
+		</a>
+
+		<ul class="submenu" {if $breadcrumb[0]["title"] == $menu['title']}style="display:block;"{/if}>
+
+			{foreach from=$menu['sub'] item=subMenu}
+			<li {if $breadcrumb[1]['title'] == $subMenu['title']}class="active"{/if}>
+			<a href="{$subMenu['url']}">
+				<i class="glyphicon glyphicon-hand-right"></i>
+				{$subMenu['title']}
+			</a>
+			</li>
+			{/foreach}
+		</ul>
+		{/if}
+	</li>
+	{/foreach}
+</ul>
+<div id="sidebar-collapse" class="sidebar-collapse">
+    <i data-icon2="icon-double-angle-right" data-icon1="icon-double-angle-left" class="icon-double-angle-left"></i>
+</div>

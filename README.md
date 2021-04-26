@@ -14,6 +14,9 @@ INSTRUCTIONS:
 
 Requirements: You MUST have the following installed and running on your server.
 
+Install Docker https://docs.docker.com/engine/install/ubuntu/     
+and this for docker compose:  https://docs.docker.com/compose/install/
+
     docker
     docker-compose
     git

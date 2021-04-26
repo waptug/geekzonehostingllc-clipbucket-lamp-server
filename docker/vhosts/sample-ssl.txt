@@ -1,13 +1,13 @@
 <VirtualHost *:443>
     ServerAdmin webmaster@localhost
-    DocumentRoot /var/www/html/public
+    DocumentRoot /var/www/html
     ServerName yourdomain.com
 
     Include /etc/letsencrypt/options-ssl-apache.conf
     SSLCertificateFile /etc/letsencrypt/live/yourdomain.com/fullchain.pem
     SSLCertificateKeyFile /etc/letsencrypt/live/yourdomain.com/privkey.pem
 
-    <Directory /var/www/html/public>
+    <Directory /var/www/html>
         Options FollowSymLinks
         AllowOverride All
         Require all granted

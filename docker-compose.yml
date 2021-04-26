@@ -8,13 +8,13 @@ services:
     restart: unless-stopped
     ports:
       - "80:80"
-      . "443:443"
+      - "443:443"
     depends_on:
       - mysql
     volumes:
-      - ./app/upload:/var/www/html/public
+      - ./app/upload:/var/www/html
       - ./docker/php/local.ini:/usr/local/etc/php/php.ini
-      - ./docker/vhosts:/etc/apache2/sites-enabled
+      #- ./docker/vhosts:/etc/apache2/sites-enabled
       - ./certs/certbot/conf:/etc/letsencrypt
       - ./certs/certbot/www:/var/www/certbot
     networks:

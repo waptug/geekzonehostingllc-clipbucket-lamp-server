@@ -75,9 +75,12 @@ From the Linux command line - Start by Creating a folder on your server to hold 
 
     docker-compose up -d
 
-        Open the browser and go to "localhost" if you are deploying locally or your public ip address if you are on the cloud. You should be able to see the installation wizard.
+        Open the browser and go to "localhost" if you are deploying locally or your public ip address if you are on the cloud. 
+        You should be able to see the installation wizard.
 
-        Keep in mind that in the wizard Precheck of modules. ffmpeg will appear as not available, and that is fine. After the installation is finished it will by recognized, and to check that buy going to the admin area-> Toolbox -> Server Modules Info.
+        Keep in mind that in the wizard Precheck of modules. ffmpeg will appear as not available, and that is fine. 
+        After the installation is finished it will by recognized, and to check that buy going to the 
+        admin area-> Toolbox -> Server Modules Info.
 
         In the database installation wizard make sure to fill out the information as follow:
 
@@ -90,6 +93,10 @@ From the Linux command line - Start by Creating a folder on your server to hold 
 
 
 Option #2 - Deployment with SSL
+
+     (Make sure your domain is pointing to your server IP address before you proceed)
+
+     You can check the SSL how to video here at https://videoserver.summerstreams.com
 
     - Edit init-letsencrypt.sh file and replace yourdomain.com for your actual domain.
     - Edit docker/vhosts/default.conf and replace yourdomain.com for your actual domain.
@@ -117,9 +124,11 @@ Option #2 - Deployment with SSL
         (you should be able to go to the browser and go to your domain )
 
 
-    Keep in mind that in the wizard Precheck of modules. ffmpeg will appear as not available, and that is fine. After the installation is finished it will by recognized, and to check that buy going to the admin area-> Toolbox -> Server Modules Info.
+    Keep in mind that in the wizard Precheck of modules. ffmpeg will appear as not available, and that is fine. 
+    After the installation is finished it will by recognized, and to check that buy going to the 
+    admin area-> Toolbox -> Server Modules Info.
 
-        In the database installation wizard make sure to fill out the information as follow:
+    In the database installation wizard make sure to fill out the information as follow:
 
     host = mysql 
     database name = app 

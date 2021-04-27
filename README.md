@@ -11,6 +11,18 @@ Included with the Enhanced Clipbucket image is the phpMyAdmin script for you to 
 Building a working Clipbucket server from scratch is a very difficult process to install all of the server dependencies required. This image has done all the hard work for you. This image was produced by Michael Scott McGinn at GeekZoneHosting.Com and contributed to the Docker community.
 
 INSTRUCTIONS:
+This system requires that the server you are installing this on is running Ubuntu Linux version 20 or better.
+
+Things to decide: Are you going to install a SSL certificate on your site? Then do that first before you install Clipbucket.
+See the SSL how to video here at https://videoserver.summerstreams.com
+
+Are you going to make your site public and point a domain name to it? Then you will need to have your domain name A record pointing to your server IP address
+and have given it time to propagate after you have changed it. Usually 6 to 72 hours it will take before folks will be able to see your site.
+If you need a domain name please consider https://geekzonehosting.com and register one or use your own domanin service.
+You will also need to set up a port forwarding on your router to allow traffic to port 80 of the server you are running on if you are running this on your own 
+bearmetal server in your home or office.
+
+If you just going to run your site on a local server on your intranet and access it via localhost or an ip address then you do not need a domain name registered.
 
 Requirements: You MUST have the following installed and running on your server.
 

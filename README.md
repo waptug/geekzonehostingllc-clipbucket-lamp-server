@@ -10,6 +10,7 @@ Included with the Enhanced Clipbucket image is the phpMyAdmin script for you to 
 
 Building a working Clipbucket server from scratch is a very difficult process to install all of the server dependencies required. This image has done all the hard work for you. This image was produced by Michael Scott McGinn at GeekZoneHosting.Com and contributed to the Docker community.
 
+
 INSTRUCTIONS:
 
 Requirements: You MUST have the following installed and running on your server.
@@ -18,49 +19,105 @@ Requirements: You MUST have the following installed and running on your server.
     docker-compose
     git
 
+For docker and docker-compose installation please follow:
+
+ - https://docs.docker.com/engine/install/ubuntu/  (docker)
+ - https://docs.docker.com/compose/install/  (docker-compose)
+
 =========================================================
 
 DO NOT BEGIN UNTIL THE PREVIOUS STEPS HAVE BEEN COMPLETED.
 
 =========================================================
 
+There are to ways to deploy this project. The first option is more suitable
+for testing or deploying the application locally. And the second option it's for
+SSL support with your own domain.
+
+
+Option  #1 - Local deployment (without SSL)
+
 From the Linux command line - Start by Creating a folder on your server to hold this project and run step 1 from that folder
 
     Clone the git repository.
 
-git clone https://github.com/waptug/geekzonehostingllc-clipbucket-lamp-server
+    git clone https://github.com/waptug/geekzonehostingllc-clipbucket-lamp-server
 
-    Create a .env file by using the .env.sample as a template
+        Create a .env file by using the .env.sample as a template
 
-cp .env.sample .env
+    cp .env.sample .env
 
-    Now edit the copied .env file and fill the information for MYSQL_PASSWORD and MYSQL_ROOT_PASSWORD, don't touch anything else.
+        Now edit the copied .env file and fill the information for MYSQL_PASSWORD and MYSQL_ROOT_PASSWORD, don't touch anything else.
 
-    If you are in Linux, you will need to give permission to the following folders, if your are on Windows make sure that the project is in a drive that is accessible by docker.
+        If you are in Linux, you will need to give permission to the following folders, if your are on Windows make sure that the project is in a drive that is accessible by docker.
 
-For linux deployments:
+    For linux deployments:
 
-chmod -R 777 app/upload/cache
+    chmod -R 777 app/upload/cache
 
-chmod -R 777 app/upload/files
+    chmod -R 777 app/upload/files
 
-chmod -R 777 app/upload/includes
+    chmod -R 777 app/upload/includes
 
-chmod -R 777 app/upload/images
+    chmod -R 777 app/upload/images
 
-    Deploy the docker compose project.
+        Deploy the docker compose project.
 
-docker-compose up -d
+    docker-compose up -d
 
-    Open the browser and go to "localhost" if you are deploying locally or your public ip address if you are on the cloud. You should be able to see the installation wizard.
+        Open the browser and go to "localhost" if you are deploying locally or your public ip address if you are on the cloud. You should be able to see the installation wizard.
+
+        Keep in mind that in the wizard Precheck of modules. ffmpeg will appear as not available, and that is fine. After the installation is finished it will by recognized, and to check that buy going to the admin area-> Toolbox -> Server Modules Info.
+
+        In the database installation wizard make sure to fill out the information as follow:
+
+    host = mysql 
+    database name = app 
+    database user = admin 
+    database password = (the one that is specified in the .env file)
+
+        Continue and finish the installation.
+
+
+Option #2 - Deployment with SSL
+
+    - Edit init-letsencrypt.sh file and replace yourdomain.com for your actual domain.
+    - Edit docker/vhosts/default.conf and replace yourdomain.com for your actual domain.
+    - Uncomment (remove #) from line 17 of the docker-compose.yml, that will allow the apache server to ready
+        for the certificate request.
+
+        #- ./docker/vhosts:/etc/apache2/sites-enabled
+
+    - Execute the init-letsencrypt.sh  
+    
+        (you should receive a congratulations message at the end of the execution)
+        
+    - Put down docker services: docker-compose down
+    - Now lets create the SSL configuration for this certificate.
+
+        cp docker/vhosts/sample.ssl.txt cp docker/vhosts/yourdomain.com.conf
+
+        (Make sure to end the file with a .conf extension)
+
+        Edit the file and replace the 3 ocurrencies of yourdomain.com for your actual
+        domain.
+
+    - Bring the services back up: docker-compose up -d
+
+        (you should be able to go to the browser and go to your domain )
+
 
     Keep in mind that in the wizard Precheck of modules. ffmpeg will appear as not available, and that is fine. After the installation is finished it will by recognized, and to check that buy going to the admin area-> Toolbox -> Server Modules Info.
 
-    In the database installation wizard make sure to fill out the information as follow:
+        In the database installation wizard make sure to fill out the information as follow:
 
-host = mysql database name = app database user = admin database password = (the one that is specified in the .env file)
+    host = mysql 
+    database name = app 
+    database user = admin 
+    database password = (the one that is specified in the .env file)
 
     Continue and finish the installation.
+
 
 Additional notes:
 

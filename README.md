@@ -34,11 +34,6 @@ and this for docker compose:  https://docs.docker.com/compose/install/
     docker-compose
     git
 
-For docker and docker-compose installation please follow:
-
- - https://docs.docker.com/engine/install/ubuntu/  (docker)
- - https://docs.docker.com/compose/install/  (docker-compose)
-
 =========================================================
 
 DO NOT BEGIN UNTIL THE PREVIOUS STEPS HAVE BEEN COMPLETED.
@@ -46,7 +41,7 @@ DO NOT BEGIN UNTIL THE PREVIOUS STEPS HAVE BEEN COMPLETED.
 =========================================================
 
 There are to ways to deploy this project. The first option is more suitable
-for testing or deploying the application locally. And the second option it's for
+for deploying the application locally. And the second option it's for
 SSL support with your own domain.
 
 

@@ -47,7 +47,8 @@ SSL support with your own domain.
 
 Option  #1 - Local deployment (without SSL)
 
-From the Linux command line - Start by Creating a folder on your server to hold this project and run step 1 from that folder
+From the Linux command line - Start by Creating a folder on your server to hold this project 
+and run step 1 from that folder
 
     Clone the git repository.
 
@@ -57,9 +58,11 @@ From the Linux command line - Start by Creating a folder on your server to hold 
 
     cp .env.sample .env
 
-        Now edit the copied .env file and fill the information for MYSQL_PASSWORD and MYSQL_ROOT_PASSWORD, don't touch anything else.
+        Now edit the copied .env file and fill the information for MYSQL_PASSWORD and MYSQL_ROOT_PASSWORD, 
+        don't touch anything else.
 
-        If you are in Linux, you will need to give permission to the following folders, if your are on Windows make sure that the project is in a drive that is accessible by docker.
+        If you are in Linux, you will need to give permission to the following folders, if your are on 
+        Windows make sure that the project is in a drive that is accessible by docker.
 
     For linux deployments:
 
@@ -75,12 +78,12 @@ From the Linux command line - Start by Creating a folder on your server to hold 
 
     docker-compose up -d
 
-        Open the browser and go to "localhost" if you are deploying locally or your public ip address if you are on the cloud. 
-        You should be able to see the installation wizard.
+        Open the browser and go to "localhost" if you are deploying locally or your public ip address 
+        if you are on the cloud. You should be able to see the installation wizard.
 
-        Keep in mind that in the wizard Precheck of modules. ffmpeg will appear as not available, and that is fine. 
-        After the installation is finished it will by recognized, and to check that buy going to the 
-        admin area-> Toolbox -> Server Modules Info.
+        Keep in mind that in the wizard Precheck of modules. ffmpeg will appear as not available, and that 
+        is fine. After the installation is finished it will by recognized, and to check that buy going to 
+        the admin area-> Toolbox -> Server Modules Info.
 
         In the database installation wizard make sure to fill out the information as follow:
 
@@ -100,8 +103,8 @@ Option #2 - Deployment with SSL
 
     - Edit init-letsencrypt.sh file and replace yourdomain.com for your actual domain.
     - Edit docker/vhosts/default.conf and replace yourdomain.com for your actual domain.
-    - Uncomment (remove #) from line 17 of the docker-compose.yml, that will allow the apache server to ready
-        for the certificate request.
+    - Uncomment (remove #) from line 17 of the docker-compose.yml, that will allow the 
+      apache server to ready for the certificate request.
 
         #- ./docker/vhosts:/etc/apache2/sites-enabled
 
@@ -124,9 +127,9 @@ Option #2 - Deployment with SSL
         (you should be able to go to the browser and go to your domain )
 
 
-    Keep in mind that in the wizard Precheck of modules. ffmpeg will appear as not available, and that is fine. 
-    After the installation is finished it will by recognized, and to check that buy going to the 
-    admin area-> Toolbox -> Server Modules Info.
+    Keep in mind that in the wizard Precheck of modules. ffmpeg will appear as not available, 
+    and that is fine. After the installation is finished it will by recognized, and to check 
+    that buy going to the  admin area-> Toolbox -> Server Modules Info.
 
     In the database installation wizard make sure to fill out the information as follow:
 
@@ -140,7 +143,10 @@ Option #2 - Deployment with SSL
 
 Additional notes:
 
-    When you upload a video the application its going to process it, so you will need to wait for that process to finish. Keep in mind that speed of the process depends of your CPU Power. So try with short videos first. You can check the process log in the admin area Videos -> Videos Manager -> File conversion details .
+    When you upload a video the application its going to process it, so you will need to wait for
+    that process to finish. Keep in mind that speed of the process depends of your CPU Power. So try 
+    with short videos first. You can check the process log in the admin area 
+    Videos -> Videos Manager -> File conversion details .
 
     Also you can check the conversion queue in the admin area -> toolbox -> Conversion queue manager.
 
@@ -150,15 +156,20 @@ FINISHED YOU ARE DONE - Enjoy your Clipbucket Docker Image
 
 ====================================================
 
-After you get this image installed if you need something customized about the docker image or new modifications to the docker image you can purchase services from this affiliate link.
+After you get this image installed if you need something customized about the docker image or new 
+modifications to the docker image you can purchase services from this affiliate link.
 
 https://fvrr.co/3vE1B2F
 
-GeekZoneHosting.Com, LLC will receive a commission if you purchase any services from clicking the above link.
+GeekZoneHosting.Com, LLC will receive a commission if you purchase any services from clicking 
+the above link.
 
-GeekZoneHosting.Com appreciates your support of this project. If you appreciate this service and would like to directly support GeekZoneHosting.Com please consider purchasing a VPS server from us or a domain name for your site. https://geekzonehosting.com
+GeekZoneHosting.Com appreciates your support of this project. If you appreciate this service and would 
+like to directly support GeekZoneHosting.Com please consider purchasing a VPS server from us or a domain 
+name for your site. https://geekzonehosting.com
 
-We can sell Virtual Private Server hosting and dedicated managed Linux servers to you if you do not have your own server solution.
+We can sell Virtual Private Server hosting and dedicated managed Linux servers to you if you do not have 
+your own server solution. 
 
 See the working install of this image at https://videoserver.summerstreams.com for reference.
 

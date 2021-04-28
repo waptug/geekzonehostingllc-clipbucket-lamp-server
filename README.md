@@ -220,14 +220,10 @@ the above link.
 
 GeekZoneHosting.Com appreciates your support of this project. If you appreciate this service and would 
 like to directly support GeekZoneHosting.Com please consider purchasing a VPS server from us or a domain 
-name for your site. https://geekzonehosting.com or https://mtbn.net
+name for your site from: https://geekzonehosting.com or https://mtbn.net
 
-You can also directly tip us at https://paypal.me/geekzonehosting
-
-
-We can sell Virtual Private Server hosting and dedicated managed Linux servers to you if you do not have 
-your own server solution. 
+You can also directly tip us at https://paypal.me/geekzonehosting 
 
 See the working install of this image at https://videoserver.summerstreams.com for reference.
 
-Community Support for using Clipbucket is available at Clipbucket.com
+Community Support for using Clipbucket is available at https://Clipbucket.com

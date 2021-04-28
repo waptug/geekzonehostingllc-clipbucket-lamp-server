@@ -1,6 +1,8 @@
 # geekzonehostingllc-clipbucket-lamp-server
+
 geekzonehostingllc/clipbucket-lamp-server
-See docker hub repo at docker pull geekzonehostingllc/clipbucket-lamp-server: latest
+
+See docker hub repo at https://hub.docker.com/repository/docker/geekzonehostingllc/clipbucket-lamp-server
 
 Enjoy a self hosted Clipbucket.Com Video Streaming Server and photo gallery that you control and maintain.
 

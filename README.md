@@ -4,11 +4,17 @@ See docker hub repo at docker pull geekzonehostingllc/clipbucket-lamp-server: la
 
 Enjoy a self hosted Clipbucket.Com Video Streaming Server and photo gallery that you control and maintain.
 
-This is a fully built out LAMP stack server running linux with all dependencies like ffmpeg and everything needed with a fully built and configured Default Clipbucket.Com Free Version install. It is ready for you to add content to and style the theme as you like.
+This is a fully built out LAMP stack server running linux with all dependencies like ffmpeg and everything 
+needed with a fully built and configured Default Clipbucket.Com Free Version install. It is ready for you to add 
+content to and style the theme as you like.
 
-Included with the Enhanced Clipbucket image is the phpMyAdmin script for you to edit your database if needed. The system also has a automatic CertBot service running so you can register your SSL cert using Let's Encrypt and the CertBot will automaticly renew your cert for you.
+Included with the Enhanced Clipbucket image is the phpMyAdmin script for you to edit your database if needed. The 
+system also has a automatic CertBot service running so you can register your SSL cert using Let's Encrypt and the 
+CertBot will automaticly renew your cert for you.
 
-Building a working Clipbucket server from scratch is a very difficult process to install all of the server dependencies required. This image has done all the hard work for you. This image was produced by Michael Scott McGinn at GeekZoneHosting.Com and contributed to the Docker community.
+Building a working Clipbucket server from scratch is a very difficult process to install all of the server
+dependencies required. This image has done all the hard work for you. This image was produced by 
+Michael Scott McGinn at GeekZoneHosting.Com and contributed to the Docker community.
 
 
 INSTRUCTIONS:
@@ -74,7 +80,8 @@ To install lynx if you need it:  apt install lynx
       In a browser using https://whatismyip.com to see what your isp has assigned to you this will be the ip address you 
       point your domain to or what address you access your site from.
       It is recommended to have a static ip address from your isp but you can also use a dynamic ip (just know that you may not
-      depend on the dynamic ip address to stay the same if your isp changes it on you.) You may need to setup a dynamic ip fordering system on your router.
+      depend on the dynamic ip address to stay the same if your isp changes it on you.) You may need to setup a dynamic
+      ip fordering system on your router.
       
 =========================================================
 

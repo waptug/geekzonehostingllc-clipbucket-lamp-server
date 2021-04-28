@@ -60,7 +60,9 @@ to install and use a text browser like lynx to access the following web sites.
 To install lynx if you need it:  apt install lynx
 
 2.) Install Docker https://docs.docker.com/engine/install/ubuntu/     
+
 3.) Install Docker-Compose https://docs.docker.com/compose/install/
+
 4.) Test if you have git working. Git should already be install by default.
      
      Type:  git --version 

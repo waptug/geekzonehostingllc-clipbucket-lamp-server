@@ -64,7 +64,8 @@ To install lynx if you need it:  apt install lynx
 4.) Test if you have git working. Git should already be install by default.
      
      Type:  git --version 
-     It should report the version of git you are running or give you an error and suggest how to install git if it is not installed.
+     It should report the version of git you are running or give you an error and suggest 
+     how to install git if it is not installed.
      
 5.) Install net-tools so you can use the ifconfig command.
     apt install net-tools

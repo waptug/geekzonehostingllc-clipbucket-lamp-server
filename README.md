@@ -40,17 +40,8 @@ DO NOT BEGIN UNTIL THE PREVIOUS STEPS HAVE BEEN COMPLETED.
 
 =========================================================
 
-There are to ways to deploy this project. The first option is more suitable
-for deploying the application locally. And the second option it's for
-SSL support with your own domain.
 
-
-Option  #1 - Local deployment (without SSL)
-
-From the Linux command line - Start by Creating a folder on your server to hold this project 
-and run step 1 from that folder
-
-    Clone the git repository.
+Clone the git repository.
 
     git clone https://github.com/waptug/geekzonehostingllc-clipbucket-lamp-server
 
@@ -74,7 +65,16 @@ and run step 1 from that folder
 
     chmod -R 777 app/upload/images
 
-        Deploy the docker compose project.
+
+There are to ways to deploy this project. The first option is more suitable
+for deploying the application locally. And the second option it's for
+SSL support with your own domain.
+
+
+Option  #1 - Local deployment (without SSL)
+
+
+    Deploy the docker compose project.
 
     docker-compose up -d
 

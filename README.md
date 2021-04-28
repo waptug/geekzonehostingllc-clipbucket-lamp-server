@@ -220,7 +220,10 @@ the above link.
 
 GeekZoneHosting.Com appreciates your support of this project. If you appreciate this service and would 
 like to directly support GeekZoneHosting.Com please consider purchasing a VPS server from us or a domain 
-name for your site. https://geekzonehosting.com
+name for your site. https://geekzonehosting.com or https://mtbn.net
+
+You can also directly tip us at https://paypal.me/geekzonehosting
+
 
 We can sell Virtual Private Server hosting and dedicated managed Linux servers to you if you do not have 
 your own server solution. 

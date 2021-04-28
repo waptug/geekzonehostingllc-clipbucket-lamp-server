@@ -24,9 +24,11 @@ Usually 6 to 72 hours it will take before folks will be able to see your site.
 
 If you need a domain name please consider https://geekzonehosting.com or https://mtbn.net and register one.
 
-You will also need to set up a port forwarding on your router to allow traffic to port 80 or which ever port you want to run this on of the server you are running on if you are running this on your own bearmetal server in your home or office.
+You will also need to set up a port forwarding on your router to allow traffic to port 80 or which ever port you
+want to run this on of the server you are running on if you are running this on your own bearmetal server in your home or office.
 
-If you are just going to run your site on a local server on your intranet and access it via localhost or an ip address then you do not need a domain name registered.
+If you are just going to run your site on a local server on your intranet and access it via localhost or an ip address then you 
+do not need a domain name registered.
 
 Requirements: You MUST have the following installed and running on your server unless you are running a vps with Linux ubuntu already installed.
 
@@ -45,7 +47,9 @@ Type this at your comand prompt
 
 sudo su
 
-Open a browser window if your running in desktop mode and read up on how to install docker and docker-compose. If your running in server mode without a graphical desktop you will need another computer running a browser or you will need to install and use a text browser like lynx to access the following web sites.
+Open a browser window if your running in desktop mode and read up on how to install docker and docker-compose. 
+If your running in server mode without a graphical desktop you will need another computer running a browser or you will need
+to install and use a text browser like lynx to access the following web sites.
 
 To install lynx if you need it:  apt install lynx
 
@@ -60,14 +64,17 @@ To install lynx if you need it:  apt install lynx
     apt install net-tools
     
     Then type 
+    
       ifconfig
       
       to see what the ip address of your server is
       
       You will need this info to set up your system 
       You will also need to know the public ip address pointing to your network 
-      In a browser using https://whatismyip.com to see what your isp has assigned to you this will be the ip address you point your domain to or what address you access your site from.
-      It is recommended to have a static ip address from your isp but you can also use a dynamic ip (just know that you may not depend on the dynamic ip address to stay the same if your isp changes it on you.) You may need to setup a dynamic ip fordering system on your router.
+      In a browser using https://whatismyip.com to see what your isp has assigned to you this will be the ip address you 
+      point your domain to or what address you access your site from.
+      It is recommended to have a static ip address from your isp but you can also use a dynamic ip (just know that you may not
+      depend on the dynamic ip address to stay the same if your isp changes it on you.) You may need to setup a dynamic ip fordering system on your router.
       
 =========================================================
 

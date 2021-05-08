@@ -1,39 +1,93 @@
 # geekzonehostingllc-clipbucket-lamp-server
+
 geekzonehostingllc/clipbucket-lamp-server
-See docker hub repo at docker pull geekzonehostingllc/clipbucket-lamp-server: latest
+
+See docker hub repo at https://hub.docker.com/repository/docker/geekzonehostingllc/clipbucket-lamp-server
 
 Enjoy a self hosted Clipbucket.Com Video Streaming Server and photo gallery that you control and maintain.
 
-This is a fully built out LAMP stack server running linux with all dependencies like ffmpeg and everything needed with a fully built and configured Default Clipbucket.Com Free Version install. It is ready for you to add content to and style the theme as you like.
+This is a fully built out LAMP stack server running linux with all dependencies like ffmpeg and everything 
+needed with a fully built and configured Default Clipbucket.Com Free Version install. It is ready for you to add 
+content to and style the theme as you like.
 
-Included with the Enhanced Clipbucket image is the phpMyAdmin script for you to edit your database if needed. The system also has a automatic CertBot service running so you can register your SSL cert using Let's Encrypt and the CertBot will automaticly renew your cert for you.
+Included with the Enhanced Clipbucket image is the phpMyAdmin script for you to edit your database if needed. The 
+system also has a automatic CertBot service running so you can register your SSL cert using Let's Encrypt and the 
+CertBot will automaticly renew your cert for you.
 
-Building a working Clipbucket server from scratch is a very difficult process to install all of the server dependencies required. This image has done all the hard work for you. This image was produced by Michael Scott McGinn at GeekZoneHosting.Com and contributed to the Docker community.
+Building a working Clipbucket server from scratch is a very difficult process to install all of the server
+dependencies required. This image has done all the hard work for you. This image was produced by 
+Michael Scott McGinn at GeekZoneHosting.Com and contributed to the Docker community.
 
 
 INSTRUCTIONS:
 This system requires that the server you are installing this on is running Ubuntu Linux version 20 or better.
 
 Things to decide: Are you going to install a SSL certificate on your site? Then do that first before you install Clipbucket.
-See the SSL how to video here at https://videoserver.summerstreams.com
 
-Are you going to make your site public and point a domain name to it? Then you will need to have your domain name A record pointing to your server IP address
-and have given it time to propagate after you have changed it. Usually 6 to 72 hours it will take before folks will be able to see your site.
-If you need a domain name please consider https://geekzonehosting.com and register one or use your own domanin service.
-You will also need to set up a port forwarding on your router to allow traffic to port 80 of the server you are running on if you are running this on your own 
-bearmetal server in your home or office.
+Are you going to make your site public and point a domain name to it? 
 
-If you just going to run your site on a local server on your intranet and access it via localhost or an ip address then you do not need a domain name registered.
+Then you will need to have your domain name A record pointing to your server IP address and have given it time to propagate after you have changed it. 
 
-Requirements: You MUST have the following installed and running on your server.
+Usually 6 to 72 hours it will take before folks will be able to see your site.
 
-Install Docker https://docs.docker.com/engine/install/ubuntu/     
-and this for docker compose:  https://docs.docker.com/compose/install/
+If you need a domain name please consider https://geekzonehosting.com or https://mtbn.net and register one.
 
-    docker
-    docker-compose
-    git
+You will also need to set up a port forwarding on your router to allow traffic to port 80 or which ever port you
+want to run this on of the server you are running on if you are running this on your own bearmetal server in your home or office.
 
+If you are just going to run your site on a local server on your intranet and access it via localhost or an ip address then you 
+do not need a domain name registered.
+
+Requirements: You MUST have the following installed and running on your server unless you are running a vps with Linux ubuntu already installed.
+
+Setup your Computer to be able to run as a web server.
+
+1.) Install Ubuntu Desktop or Server- Your choice. 
+https://ubuntu.com/download
+
+After you have tested that you can boot your computer and login to the system then continue.
+
+Open a comand terminal from the desktop if you are running the desktop graphical user interface.
+
+Make sure you are working as the super user on the system
+
+Type this at your comand prompt
+
+sudo su
+
+Open a browser window if your running in desktop mode and read up on how to install docker and docker-compose. 
+If your running in server mode without a graphical desktop you will need another computer running a browser or you will need
+to install and use a text browser like lynx to access the following web sites.
+
+To install lynx if you need it:  apt install lynx
+
+2.) Install Docker https://docs.docker.com/engine/install/ubuntu/     
+
+3.) Install Docker-Compose https://docs.docker.com/compose/install/
+
+4.) Test if you have git working. Git should already be install by default.
+     
+     Type:  git --version 
+     It should report the version of git you are running or give you an error and suggest 
+     how to install git if it is not installed.
+     
+5.) Install net-tools so you can use the ifconfig command.
+    apt install net-tools
+    
+    Then type 
+    
+      ifconfig
+      
+      to see what the ip address of your server is
+      
+      You will need this info to set up your system 
+      You will also need to know the public ip address pointing to your network 
+      In a browser using https://whatismyip.com to see what your isp has assigned to you this will be the ip address you 
+      point your domain to or what address you access your site from.
+      It is recommended to have a static ip address from your isp but you can also use a dynamic ip (just know that you may not
+      depend on the dynamic ip address to stay the same if your isp changes it on you.) You may need to setup a dynamic
+      ip fordering system on your router.
+      
 =========================================================
 
 DO NOT BEGIN UNTIL THE PREVIOUS STEPS HAVE BEEN COMPLETED.
@@ -41,7 +95,7 @@ DO NOT BEGIN UNTIL THE PREVIOUS STEPS HAVE BEEN COMPLETED.
 =========================================================
 
 
-Clone the git repository.
+1.) Clone the git repository. It does not matter what folder your in when you begin.
 
     git clone https://github.com/waptug/geekzonehostingllc-clipbucket-lamp-server
 
@@ -68,7 +122,7 @@ Clone the git repository.
 
 There are to ways to deploy this project. The first option is more suitable
 for deploying the application locally. And the second option it's for
-SSL support with your own domain.
+SSL support with your own domain.You must have a domain name to use SSL.
 
 
 Option  #1 - Local deployment (without SSL)
@@ -79,10 +133,12 @@ Option  #1 - Local deployment (without SSL)
     docker-compose up -d
 
         Open the browser and go to "localhost" if you are deploying locally or your public ip address 
-        if you are on the cloud. You should be able to see the installation wizard.
+        if you are on the cloud. 
+        
+        You should be able to see the installation wizard.
 
         Keep in mind that in the wizard Precheck of modules. ffmpeg will appear as not available, and that 
-        is fine. After the installation is finished it will by recognized, and to check that buy going to 
+        is fine. After the installation is finished it will be recognized, and to check that by going to 
         the admin area-> Toolbox -> Server Modules Info.
 
         In the database installation wizard make sure to fill out the information as follow:
@@ -166,11 +222,10 @@ the above link.
 
 GeekZoneHosting.Com appreciates your support of this project. If you appreciate this service and would 
 like to directly support GeekZoneHosting.Com please consider purchasing a VPS server from us or a domain 
-name for your site. https://geekzonehosting.com
+name for your site from: https://geekzonehosting.com or https://mtbn.net
 
-We can sell Virtual Private Server hosting and dedicated managed Linux servers to you if you do not have 
-your own server solution. 
+You can also directly tip us at https://paypal.me/geekzonehosting 
 
 See the working install of this image at https://videoserver.summerstreams.com for reference.
 
-Community Support for using Clipbucket is available at Clipbucket.com
+Community Support for using Clipbucket is available at https://Clipbucket.com

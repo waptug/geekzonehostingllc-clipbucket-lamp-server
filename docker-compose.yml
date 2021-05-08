@@ -39,6 +39,18 @@ services:
     networks:
       - net
 
+  phpmyadmin:
+    container_name: "phpmyadmin"
+    restart: unless-stopped
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_HOST=mysql
+      - PMA_PORT=3306
+    ports:
+      - "8080:80"
+    networks:
+      - net
+
   certbot:
     image: certbot/certbot
     restart: unless-stopped

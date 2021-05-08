@@ -1,3 +1,22 @@
+<VirtualHost *:80>
+   ServerAdmin webmaster@localhost
+   DocumentRoot /var/www/certbot
+   ServerName yourdomain.com
+
+   ErrorLog ${APACHE_LOG_DIR}/error.log
+   CustomLog ${APACHE_LOG_DIR}/access.log combined
+   <Directory /var/www/certbot>
+     Options -Indexes
+   </Directory>
+
+   <Location /.well-known/>
+        DirectoryIndex index.html
+        DirectoryIndex enabled
+        Require all granted
+   </Location>
+
+</VirtualHost>
+
 <VirtualHost *:443>
     ServerAdmin webmaster@localhost
     DocumentRoot /var/www/html
